@@ -303,7 +303,8 @@
 
     .thumbs{
       display:grid;
-      grid-template-columns:repeat(6, 1fr);
+      /* 10장의 사진을 위해 5칸씩 2줄로 배치 */
+      grid-template-columns:repeat(5, 1fr);
       gap:6px;
       margin-top:12px;
     }
@@ -593,12 +594,12 @@
 
         <div class="viewer" id="viewer">
           <img id="mainImg" src="images/g1.jpg" alt="갤러리 사진" loading="lazy">
-          <div class="count" id="count">1 / 6</div>
+          <div class="count" id="count">1 / 10</div>
           <div class="navbtn prev" id="prevBtn">‹</div>
           <div class="navbtn next" id="nextBtn">›</div>
         </div>
 
-        <!-- 6개 썸네일 미리보기 -->
+        <!-- 10개 썸네일 미리보기 -->
         <div class="thumbs" id="thumbs"></div>
       </div>
     </section>
@@ -658,7 +659,9 @@
                 <span>11:00</span><span>11:25</span><span>11:50</span><span>12:10</span>
                 <span class="break-time">Break Time</span>
                 <span>13:40</span><span>14:00</span><span>14:20</span><span>14:40</span>
-
+                <span>15:05</span><span>15:35</span><span>16:05</span><span>16:30</span>
+                <span>17:00</span><span>17:20</span><span>17:45</span><span>18:15</span>
+                <span>18:45</span><span>19:00</span><span>19:25</span>
               </div>
             </div>
 
@@ -666,7 +669,11 @@
             <div class="timetable-col">
               <h4>파티더풀문 <span>출발</span></h4>
               <div class="time-grid">
-                            <span>14:55</span><span>15:25</span><span>15:55</span><span>16:20</span>
+                <span>11:15</span><span>11:40</span><span>12:00</span><span></span>
+                <span class="break-time" style="grid-column: span 3; display:none;"></span> <!-- 간격 맞춤용 -->
+                <span class="break-time">Break Time</span>
+                <span>13:30</span><span>13:50</span><span>14:10</span><span>14:30</span>
+                <span>14:55</span><span>15:25</span><span>15:55</span><span>16:20</span>
                 <span>16:50</span><span>17:10</span><span>17:35</span><span>18:05</span>
                 <span>18:30</span><span>18:50</span><span>19:15</span>
               </div>
@@ -795,10 +802,11 @@
       copyToClipboard(document.getElementById('addrBox').innerText.trim());
     });
 
-    // 갤러리 슬라이더 및 썸네일 연동
+    // 갤러리 슬라이더 및 썸네일 연동 (10장으로 수정됨)
     const images = [
       "images/g1.jpg","images/g2.jpg","images/g3.jpg",
       "images/g4.jpg","images/g5.jpg","images/g6.jpg",
+      "images/g7.jpg","images/g8.jpg","images/g9.jpg","images/g10.jpg"
     ];
     let idx = 0;
     const mainImg = document.getElementById('mainImg');
