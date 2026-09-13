@@ -237,12 +237,11 @@
       transform: translate(-50%, -50%);
       width: 42px; height: 42px;
       fill: none;
-      stroke: #eb4d4b; /* 빨간 색연필 색상 */
+      stroke: #eb4d4b;
       stroke-width: 2.5;
       stroke-linecap: round;
       stroke-linejoin: round;
       opacity: 0.85;
-      /* 스르륵 그려지는 애니메이션 */
       stroke-dasharray: 300;
       stroke-dashoffset: 300;
       animation: drawCircle 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
@@ -376,60 +375,38 @@
     .lb-img{width:100%;max-height:86vh;object-fit:contain;display:block;border-radius:14px;background:#000}
     .lb-close{position:absolute;top:-10px;right:-10px;width:40px;height:40px;border-radius:999px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.12);color:#fff;font-size:18px;display:flex;align-items:center;justify-content:center;cursor:pointer}
 
-    /* RSVP MODAL */
-    .modal-overlay.bottom-sheet {
-      position:fixed;inset:0;background:rgba(0,0,0,0.6);
-      display:none;align-items:flex-end;justify-content:center;
-      z-index:9999;opacity:0;transition:opacity 0.3s ease;
+    /* ACCOUNT MODAL */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.6);
+      display: none; align-items: center; justify-content: center; z-index: 9999; padding: 20px;
+      opacity: 0; transition: opacity 0.3s ease;
     }
-    .modal-overlay.bottom-sheet.on {display:flex;opacity:1}
-    .modal-overlay.bottom-sheet .modal-content {
-      background:#fff;width:100%;max-width:480px;max-height:90vh;
-      border-radius:20px 20px 0 0;overflow-y:auto;
-      transform:translateY(100%);transition:transform 0.3s ease;
-      padding-bottom:24px;
+    .modal-overlay.on { display: flex; opacity: 1; }
+    .modal-content {
+      background: #fff; width: 100%; max-width: 400px; border-radius: 16px; overflow: hidden;
+      transform: translateY(20px); transition: transform 0.3s ease;
     }
-    .modal-overlay.bottom-sheet.on .modal-content {transform:translateY(0)}
-    .modal-overlay.bottom-sheet .modal-header {
-      position:sticky;top:0;background:#fff;z-index:10;
-      display:flex;align-items:center;justify-content:center;
-      padding:16px 20px;border-bottom:1px solid var(--line);
+    .modal-overlay.on .modal-content { transform: translateY(0); }
+    .modal-header {
+      position: relative;
+      display: flex; justify-content: center; align-items: center;
+      padding: 16px 20px; border-bottom: 1px solid var(--line); background: #f9f9f9;
     }
-    .modal-overlay.bottom-sheet .modal-header h3 {margin:0;font-size:16px;font-weight:700}
-    
+    .modal-header h3 { margin: 0; font-size: 16px; font-weight: 700; color:var(--ink); }
     .modal-close-btn {
-      position: absolute;
-      right: 14px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      border: none;
-      background: transparent;
-      color: var(--muted);
-      font-size: 24px;
-      line-height: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      padding: 0;
+      position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+      width: 32px; height: 32px; border-radius: 50%; border: none; background: transparent;
+      color: var(--muted); font-size: 24px; line-height: 1; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0;
     }
-    .modal-close-btn:active {
-      color: var(--ink);
-      background: rgba(0,0,0,.05);
+    .modal-body { padding: 10px 20px 20px; }
+    .account-item {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 16px 0; border-bottom: 1px solid var(--line);
     }
-
-    .form-body {padding:20px;text-align:left}
-    .form-desc {text-align:center;font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:20px}
-    .input-label {font-size:12px;font-weight:700;color:var(--ink);margin-bottom:6px}
-    .input-text {width:100%;border:none;border-bottom:1px solid var(--line);padding:10px 0;font-size:14px;outline:none;background:transparent;font-family:inherit}
-    .radio-group {display:flex;gap:10px;margin:8px 0 20px}
-    .radio-btn {flex:1;text-align:center;padding:12px 0;border:1px solid var(--line);background:#f9f9f9;border-radius:10px;font-size:13px;cursor:pointer;display:flex;justify-content:center;align-items:center;gap:6px}
-    .radio-btn input {display:none}
-    .radio-btn.active {border-color:var(--ink);background:#fff;font-weight:700}
-    .radio-btn.active::after {content:'';width:12px;height:12px;background:var(--ink);border-radius:50%;display:inline-block}
+    .account-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .acc-info { display: flex; flex-direction: column; gap: 4px; text-align: left; }
+    .acc-bank { font-size: 14px; font-weight: 600; color: var(--ink); }
+    .acc-name { font-size: 13px; color: var(--muted); }
 
     .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:rgba(17,17,17,.92);color:#fff;padding:10px 16px;border-radius:999px;font-size:13px;opacity:0;pointer-events:none;transition:opacity .25s ease;z-index:9999}
     .toast.on{opacity:1}
@@ -636,20 +613,22 @@
       </div>
     </section>
 
-    <!-- PAGE 5: RSVP -->
-    <section class="page-section" id="rsvp">
+    <!-- PAGE 5: ACCOUNT -->
+    <section class="page-section" id="account">
       <div class="card" style="text-align:center;">
         <div class="sec-head">
-          <h2 class="h2">전세버스 안내</h2>
-          <p class="p" style="margin-top:14px;">
-            먼 길을 와주시는 귀한 분들을 위해<br/>
-            전세버스를 준비하였습니다.<br/>
-            탑승 여부의 확인을 부탁드리겠습니다.
-          </p>
+          <h2 class="h2">마음 전하실 곳</h2>
         </div>
 
-        <div style="margin-top: 24px;">
-          <button class="btn" type="button" onclick="openModal('rsvpFormModal')">탑승여부 전달하기</button>
+        <div style="display:flex; flex-direction:column; gap:10px; margin-top:24px;">
+          <button class="btn" type="button" onclick="openModal('groomModal')" style="justify-content:space-between; background:rgba(0,0,0,.02); border: 1px solid var(--line); color: var(--ink);">
+            <span>신랑측 계좌번호 확인</span>
+            <span style="color:var(--muted)">›</span>
+          </button>
+          <button class="btn" type="button" onclick="openModal('brideModal')" style="justify-content:space-between; background:rgba(0,0,0,.02); border: 1px solid var(--line); color: var(--ink);">
+            <span>신부측 계좌번호 확인</span>
+            <span style="color:var(--muted)">›</span>
+          </button>
         </div>
 
         <footer style="margin-top: 36px; font-size: 11px; color: var(--muted); line-height: 1.6;">
@@ -669,47 +648,54 @@
     </div>
   </div>
 
-  <!-- RSVP MODAL -->
-  <div class="modal-overlay bottom-sheet" id="rsvpFormModal">
+  <!-- ACCOUNT MODALS (신랑/신부 계좌 팝업) -->
+  <div class="modal-overlay" id="groomModal">
     <div class="modal-content">
       <div class="modal-header">
-        <h3>전세버스 탑승 여부</h3>
-        <button type="button" class="modal-close-btn" onclick="closeModal('rsvpFormModal')" aria-label="닫기">×</button>
+        <h3>신랑측 계좌번호</h3>
+        <button type="button" class="modal-close-btn" onclick="closeModal('groomModal')" aria-label="닫기">×</button>
       </div>
-      
-      <form id="rsvpForm" class="form-body" action="https://script.google.com/macros/s/AKfycbyi1hHjIyfVx_A0qrhv5NID0_3JSgKh6iBwnsCZNNE9E6KsZcunlaPfGCJa6zTxjFpP/exec" method="POST" onsubmit="submitRSVP(event)">
-        <p class="form-desc">먼 길을 와주시는 귀한 분들을 위해 전세버스를 준비하였습니다.<br>탑승 여부의 확인을 부탁드리겠습니다.</p>
-
-        <div style="margin-bottom: 20px;">
-          <img src="images/bus.png" alt="버스 탑승 위치 지도" style="width: 100%; border-radius: 12px; border: 1px solid var(--line); margin-bottom: 10px;">
-          <div style="background: #fafafa; border: 1px solid var(--line); border-radius: 12px; padding: 12px; font-size: 13px; line-height: 1.5;">
-            <div><strong>버스 탑승 위치 :</strong> 관악역 2번출구 [ 세븐일레븐 안양관악역점 ] 앞</div>
-            <div><strong>버스 탑승 시간 :</strong> AM 07:45 출발</div>
+      <div class="modal-body">
+        <div class="account-item">
+          <div class="acc-info">
+            <div class="acc-bank">하나은행 82991056103307</div>
+            <div class="acc-name">예금주: 김병준 (신랑)</div>
           </div>
+          <button class="copy-mini" onclick="copyToClipboard('82991056103307')">복사</button>
         </div>
+      </div>
+    </div>
+  </div>
 
-        <div style="margin-bottom:16px;">
-          <div class="input-label">성함</div>
-          <input type="text" name="name" class="input-text" placeholder="성함을 입력해 주세요." required>
+  <div class="modal-overlay" id="brideModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>신부측 계좌번호</h3>
+        <button type="button" class="modal-close-btn" onclick="closeModal('brideModal')" aria-label="닫기">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="account-item">
+          <div class="acc-info">
+            <div class="acc-bank">KB국민은행 667210194692</div>
+            <div class="acc-name">예금주: 공성대 (아버지)</div>
+          </div>
+          <button class="copy-mini" onclick="copyToClipboard('667210194692')">복사</button>
         </div>
-
-        <div style="margin-bottom:20px;">
-          <div class="input-label">연락처</div>
-          <input type="tel" name="phone" class="input-text" placeholder="참석자 대표 연락처를 입력해 주세요." required>
+        <div class="account-item">
+          <div class="acc-info">
+            <div class="acc-bank">농협은행 3020427331151</div>
+            <div class="acc-name">예금주: 김희주 (어머니)</div>
+          </div>
+          <button class="copy-mini" onclick="copyToClipboard('3020427331151')">복사</button>
         </div>
-
-        <div class="input-label"><span style="color:red">*</span> 버스 탑승 여부</div>
-        <div class="radio-group">
-          <label class="radio-btn active">
-            <input type="radio" name="bus" value="탑승함" checked> 탑승함
-          </label>
-          <label class="radio-btn">
-            <input type="radio" name="bus" value="탑승안함"> 탑승안함
-          </label>
+        <div class="account-item">
+          <div class="acc-info">
+            <div class="acc-bank">농협은행 3021356565221</div>
+            <div class="acc-name">예금주: 공단희 (신부)</div>
+          </div>
+          <button class="copy-mini" onclick="copyToClipboard('3021356565221')">복사</button>
         </div>
-
-        <button type="submit" class="btn" id="submitBtn">신랑 & 신부에게 전달하기</button>
-      </form>
+      </div>
     </div>
   </div>
 
@@ -855,16 +841,6 @@
     document.addEventListener('touchstart', playOnInteraction, { passive: true });
     document.addEventListener('pointerdown', playOnInteraction, { passive: true });
 
-    window.addEventListener('DOMContentLoaded', () => {
-      // 1.5초 후 RSVP 자동 팝업
-      if (!sessionStorage.getItem('rsvpPopped')) {
-        setTimeout(() => {
-          openModal('rsvpFormModal');
-          sessionStorage.setItem('rsvpPopped', 'true');
-        }, 1500);
-      }
-    });
-
     // 모달 제어
     function openModal(id) {
       const modal = document.getElementById(id);
@@ -881,39 +857,12 @@
       setTimeout(() => { modal.style.display = 'none'; }, 300);
     }
 
-    // 라디오 버튼 선택
-    document.querySelectorAll('.radio-btn input[type="radio"]').forEach(radio => {
-      radio.addEventListener('change', function() {
-        document.querySelectorAll(`.radio-btn input[name="${this.name}"]`).forEach(r => {
-          r.parentElement.classList.remove('active');
-        });
-        if(this.checked) this.parentElement.classList.add('active');
-      });
-    });
-
-    // RSVP 전송
-    async function submitRSVP(e) {
-      e.preventDefault();
-      const form = e.target;
-      const btn = document.getElementById('submitBtn');
-      const originalText = btn.innerText;
-      btn.innerText = '전송 중...';
-      btn.disabled = true;
-
-      try {
-        await fetch(form.action, { method: 'POST', mode: 'no-cors', body: new FormData(form) });
-        alert("참석 의사가 성공적으로 전달되었습니다. 감사합니다!");
-        closeModal('rsvpFormModal');
-        form.reset();
-        document.querySelectorAll('.radio-btn').forEach(lbl => lbl.classList.remove('active'));
-        form.querySelector('input[name="bus"][value="탑승함"]').parentElement.classList.add('active');
-      } catch(err) {
-        alert("오류가 발생했습니다. 잠시 후 다시 시도해 주세요.");
-      } finally {
-        btn.innerText = originalText;
-        btn.disabled = false;
+    // 배경 클릭 시 모달 닫기
+    window.addEventListener('click', (e) => {
+      if (e.target.classList.contains('modal-overlay')) {
+        closeModal(e.target.id);
       }
-    }
+    });
   </script>
 </body>
 </html>
