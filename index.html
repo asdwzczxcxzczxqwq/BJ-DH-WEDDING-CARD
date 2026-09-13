@@ -86,6 +86,11 @@
       box-shadow: var(--shadow);
       padding: 24px 20px;
       width: 100%;
+      -ms-overflow-style: none; 
+      scrollbar-width: none;
+    }
+    .card::-webkit-scrollbar {
+      display: none;
     }
 
     .sec-head{text-align:center;margin:0 0 16px;padding:0 6px}
@@ -360,6 +365,22 @@
     .ico.kakao{background:rgba(255,226,0,.18)}
     .ico.tmap{background:rgba(0,0,0,.06)}
 
+    /* Shuttle UI (NEW HTML DESIGN) */
+    .shuttle-wrap { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--line); }
+    .shuttle-title { font-family: "Nanum Myeongjo", serif; font-size: 16px; font-weight: 700; color: var(--ink); text-align: center; margin: 0 0 16px 0; }
+    .shuttle-info { background: rgba(0,0,0,.02); border: 1px solid var(--line); border-radius: 12px; padding: 14px; margin-bottom: 24px; font-size: 13px; line-height: 1.5; color: var(--ink); }
+    .shuttle-row { display: flex; gap: 10px; margin-bottom: 8px; }
+    .shuttle-row:last-child { margin-bottom: 0; }
+    .shuttle-label { font-weight: 700; min-width: 32px; color: var(--muted); }
+    
+    .shuttle-timetable { display: flex; flex-direction: column; gap: 24px; }
+    .timetable-col h4 { margin: 0 0 12px 0; font-size: 14px; font-weight: 700; text-align: center; color: var(--ink); }
+    .timetable-col h4 span { font-weight: 400; font-size: 13px; color: var(--muted); }
+    .time-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+    .time-grid span { background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 7px 0; text-align: center; font-size: 13px; color: var(--muted); }
+    .time-grid .break-time { grid-column: span 4; background: transparent; border: none; font-size: 12px; color: #a0a0a0; font-style: italic; letter-spacing: 0.05em; padding: 8px 0; }
+    .shuttle-notice { font-size: 11px; color: #999; text-align: center; margin-top: 20px; }
+
     /* Button */
     .btn{
       background:#111;color:#fff;
@@ -584,7 +605,7 @@
 
     <!-- PAGE 4: LOCATION -->
     <section class="page-section" id="location">
-      <div class="card">
+      <div class="card" style="max-height: 100%; overflow-y: auto;">
         <div class="sec-head">
           <h2 class="h2">오시는 길</h2>
         </div>
@@ -610,6 +631,51 @@
             <span class="ico tmap">T</span><span>티맵</span>
           </a>
         </div>
+
+        <!-- 셔틀버스 안내 (순수 HTML/CSS) -->
+        <div class="shuttle-wrap">
+          <h3 class="shuttle-title">셔틀버스 운행 안내</h3>
+          
+          <div class="shuttle-info">
+            <div class="shuttle-row">
+              <div class="shuttle-label">차량</div>
+              <div>검정색 솔라티 <span style="font-weight: 700;">707너 3889</span></div>
+            </div>
+            <div class="shuttle-row">
+              <div class="shuttle-label">탑승</div>
+              <div>
+                오시리아역 1번 출구 우측 50m<br>
+                파티더풀문 1층 광장
+              </div>
+            </div>
+          </div>
+
+          <div class="shuttle-timetable">
+            <!-- 오시리아역 출발 -->
+            <div class="timetable-col">
+              <h4>오시리아역 <span>출발</span></h4>
+              <div class="time-grid">
+                <span>11:00</span><span>11:25</span><span>11:50</span><span>12:10</span>
+                <span class="break-time">Break Time</span>
+                <span>13:40</span><span>14:00</span><span>14:20</span><span>14:40</span>
+
+              </div>
+            </div>
+
+            <!-- 파티더풀문 출발 -->
+            <div class="timetable-col">
+              <h4>파티더풀문 <span>출발</span></h4>
+              <div class="time-grid">
+                            <span>14:55</span><span>15:25</span><span>15:55</span><span>16:20</span>
+                <span>16:50</span><span>17:10</span><span>17:35</span><span>18:05</span>
+                <span>18:30</span><span>18:50</span><span>19:15</span>
+              </div>
+            </div>
+          </div>
+          
+          <p class="shuttle-notice">* 운영 시간은 현장 상황에 따라 변동될 수 있습니다.</p>
+        </div>
+
       </div>
     </section>
 
